@@ -1,0 +1,179 @@
+{
+  "config": {
+    "siteTitle": "Whispers of the Wind",
+    "defaultBackground": "https://images.unsplash.com/photo-1476820865390-c52aeebb9891?auto=format&fit=crop&q=80&w=1920",
+    "author": {
+      "name": "Gyan Prakash Sahu",
+      "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200&h=200",
+      "bio": "A poet, wanderer, and observer of the quiet moments between heartbeats. I write to capture the fleeting beauty of nature and human connection.",
+      "socials": [
+        { "platform": "Instagram", "url": "https://instagram.com", "icon": "instagram" },
+        { "platform": "Twitter", "url": "https://twitter.com", "icon": "twitter" },
+        { "platform": "Email", "url": "mailto:hello@example.com", "icon": "mail" }
+      ]
+    }
+  },
+  "poems": [
+    {
+      "id": "autumn-leaves",
+      "title": "The Falling of Autumn",
+      "date": "October 14, 2023",
+      "background": "https://images.unsplash.com/photo-1478265409131-1f65c88f965c?auto=format&fit=crop&q=80&w=1920",
+      "text": [
+        "Gold and crimson drift gently down,",
+        "A fiery crown upon the earth.",
+        "The crisp air bites, the shadows stretch,",
+        "A silent death, a quiet birth.",
+        "",
+        "We walk among the whispered crunch,",
+        "Of memories laid bare and dry.",
+        "The trees stand naked, unashamed,",
+        "Beneath the vast, unforgiving sky."
+      ]
+    },
+    {
+      "id": "autumn-leaves",
+      "title": "The Falling of Autumn",
+      "date": "October 14, 2023",
+      "background": "https://images.unsplash.com/photo-1478265409131-1f65c88f965c?auto=format&fit=crop&q=80&w=1920",
+      "text": [
+        "Gold and crimson drift gently down,",
+        "A fiery crown upon the earth.",
+        "The crisp air bites, the shadows stretch,",
+        "A silent death, a quiet birth.",
+        "",
+        "We walk among the whispered crunch,",
+        "Of memories laid bare and dry.",
+        "The trees stand naked, unashamed,",
+        "Beneath the vast, unforgiving sky."
+      ]
+    },
+    {
+      "id": "autumn-leaves",
+      "title": "The Falling of Autumn",
+      "date": "October 14, 2023",
+      "background": "https://images.unsplash.com/photo-1478265409131-1f65c88f965c?auto=format&fit=crop&q=80&w=1920",
+      "text": [
+        "Gold and crimson drift gently down,",
+        "A fiery crown upon the earth.",
+        "The crisp air bites, the shadows stretch,",
+        "A silent death, a quiet birth.",
+        "",
+        "We walk among the whispered crunch,",
+        "Of memories laid bare and dry.",
+        "The trees stand naked, unashamed,",
+        "Beneath the vast, unforgiving sky."
+      ]
+    },
+    {
+      "id": "autumn-leaves",
+      "title": "The Falling of Autumn",
+      "date": "October 14, 2023",
+      "background": "https://images.unsplash.com/photo-1478265409131-1f65c88f965c?auto=format&fit=crop&q=80&w=1920",
+      "text": [
+        "Gold and crimson drift gently down,",
+        "A fiery crown upon the earth.",
+        "The crisp air bites, the shadows stretch,",
+        "A silent death, a quiet birth.",
+        "",
+        "We walk among the whispered crunch,",
+        "Of memories laid bare and dry.",
+        "The trees stand naked, unashamed,",
+        "Beneath the vast, unforgiving sky."
+      ]
+    },
+    {
+      "id": "autumn-leaves",
+      "title": "The Falling of Autumn",
+      "date": "October 14, 2023",
+      "background": "https://images.unsplash.com/photo-1478265409131-1f65c88f965c?auto=format&fit=crop&q=80&w=1920",
+      "text": [
+        "Gold and crimson drift gently down,",
+        "A fiery crown upon the earth.",
+        "The crisp air bites, the shadows stretch,",
+        "A silent death, a quiet birth.",
+        "",
+        "We walk among the whispered crunch,",
+        "Of memories laid bare and dry.",
+        "The trees stand naked, unashamed,",
+        "Beneath the vast, unforgiving sky."
+      ]
+    },
+    {
+      "id": "autumn-leaves",
+      "title": "The Falling of Autumn",
+      "date": "October 14, 2023",
+      "background": "https://images.unsplash.com/photo-1478265409131-1f65c88f965c?auto=format&fit=crop&q=80&w=1920",
+      "text": [
+        "Gold and crimson drift gently down,",
+        "A fiery crown upon the earth.",
+        "The crisp air bites, the shadows stretch,",
+        "A silent death, a quiet birth.",
+        "",
+        "We walk among the whispered crunch,",
+        "Of memories laid bare and dry.",
+        "The trees stand naked, unashamed,",
+        "Beneath the vast, unforgiving sky."
+      ]
+    },
+    {
+      "id": "autumn-leaves",
+      "title": "The Falling of Autumn",
+      "date": "October 14, 2023",
+      "background": "https://images.unsplash.com/photo-1478265409131-1f65c88f965c?auto=format&fit=crop&q=80&w=1920",
+      "text": [
+        "Gold and crimson drift gently down,",
+        "A fiery crown upon the earth.",
+        "The crisp air bites, the shadows stretch,",
+        "A silent death, a quiet birth.",
+        "",
+        "We walk among the whispered crunch,",
+        "Of memories laid bare and dry.",
+        "The trees stand naked, unashamed,",
+        "Beneath the vast, unforgiving sky."
+      ]
+    },
+    {
+      "id": "autumn-leaves",
+      "title": "The Falling of Autumn",
+      "date": "October 14, 2023",
+      "background": "https://images.unsplash.com/photo-1478265409131-1f65c88f965c?auto=format&fit=crop&q=80&w=1920",
+      "text": [
+        "Gold and crimson drift gently down,",
+        "A fiery crown upon the earth.",
+        "The crisp air bites, the shadows stretch,",
+        "A silent death, a quiet birth.",
+        "",
+        "We walk among the whispered crunch,",
+        "Of memories laid bare and dry.",
+        "The trees stand naked, unashamed,",
+        "Beneath the vast, unforgiving sky."
+      ]
+    },
+    {
+      "id": "ocean-song",
+      "title": "Song of the Tide",
+      "date": "August 2, 2023",
+      "background": "https://images.unsplash.com/photo-1455325884260-bc03aa624b7a?auto=format&fit=crop&q=80&w=1920",
+      "text": [
+        "The ocean breathes a rhythmic sigh,",
+        "Upon the sandy, golden shore.",
+        "It pulls me in, it pushes back,",
+        "A restless heart, forevermore."
+      ]
+    }
+  ],
+  "articles": [
+    {
+      "id": "first-article",
+      "title": "My Thoughts on Nature",
+      "date": "March 6, 2026",
+      "background": "",
+      "text": [
+        "This is my first paragraph of the article.",
+        "",
+        "This is the second paragraph separated by an empty line in the JSON array to maintain spacing."
+      ]
+    }
+  ]
+}
