@@ -9,7 +9,7 @@
       "socials": [
         { "platform": "Instagram", "url": "https://instagram.com", "icon": "instagram" },
         { "platform": "Twitter", "url": "https://twitter.com", "icon": "twitter" },
-        { "platform": "Email", "url": "mailto:hello@example.com", "icon": "mail" }
+        { "platform": "Email", "url": "mailto:gyanprakashsahu33@gmail.com", "icon": "mail" }
       ]
     }
   },
@@ -176,4 +176,5 @@
       ]
     }
   ]
+
 }
