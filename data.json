@@ -5,7 +5,7 @@
     "author": {
       "name": "Gyan Prakash Sahu",
       "photo": "dp.jpeg",
-      "bio": "A poet, wanderer, and observer of the quiet moments between heartbeats. I write to capture the fleeting beauty of nature and human connection.",
+      "bio": "A poet and observer of the quiet moments between heartbeats. I write to capture the fleeting beauty of nature and human connection.",
       "socials": [
         { "platform": "Instagram", "url": "https://instagram.com", "icon": "instagram" },
         { "platform": "Twitter", "url": "https://twitter.com", "icon": "twitter" },
@@ -15,20 +15,27 @@
   },
   "poems": [
     {
-      "id": "autumn-leaves",
-      "title": "The Falling of Autumn",
-      "date": "October 14, 2023",
+      "id": "Convos",
+      "title": "Convos",
+      "date": "February 19, 2026",
       "background": "https://images.unsplash.com/photo-1478265409131-1f65c88f965c?auto=format&fit=crop&q=80&w=1920",
       "text": [
-        "Gold and crimson drift gently down,",
-        "A fiery crown upon the earth.",
-        "The crisp air bites, the shadows stretch,",
-        "A silent death, a quiet birth.",
+        "Can we discuss something new?,",
         "",
-        "We walk among the whispered crunch,",
-        "Of memories laid bare and dry.",
-        "The trees stand naked, unashamed,",
-        "Beneath the vast, unforgiving sky."
+        "I'm tired of those repetitive convos",
+        "Of incidents that you twist before you tell",
+        "Use you're imagination to fill the vague details",
+        "Desperation that you show or the feelings that you hide",
+        "Everything's dissected in crazy details",
+        "",
+        "Personal problems that you bestowed to you're bestie",
+        "Has become a communal topic to make the talk tasty",
+        "",
+        "Can we discuss something new?",
+        "Apart from why she ditched him,",
+        "Or who's she seeing now",
+        "",
+        "Cause I'm tired of these repetitive convos",
       ]
     },
     {
@@ -189,6 +196,7 @@
   ]
 
 }
+
 
 
 
