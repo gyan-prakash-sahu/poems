@@ -5,31 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poetry & Articles</title>
     
-    <!-- Tailwind CSS for clean, responsive design -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts for elegant typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     
-    <!-- Lucide Icons for social media icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        // TODO: REPLACE THIS OBJECT WITH YOUR ACTUAL KEYS FROM FIREBASE
+        const firebaseConfig = {
+            apiKey: "AIzaSyBbtKgOCP6iFc3Kw_PI7xLaF2HaX--XXC4",
+            authDomain: "poem-website-56360.firebaseapp.com",
+            projectId: "poem-website-56360",
+            storageBucket: "poem-website-56360.firebasestorage.app",
+            messagingSenderId: "462671480081",
+            appId: "1:462671480081:web:505b5cfb7744477c8578b0"
+          };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Make Firebase functions available globally so your router can use them
+        window.firebaseDB = db;
+        window.firebaseDoc = doc;
+        window.firebaseGetDoc = getDoc;
+        window.firebaseSetDoc = setDoc;
+        window.firebaseUpdateDoc = updateDoc;
+        window.firebaseIncrement = increment;
+    </script>
 
     <style>
         /* Custom Styles to enhance the poetry aesthetic */
-        body {
-            font-family: 'EB Garamond', serif;
-            color: #1a1a1a;
-            margin: 0;
-            padding: 0;
-        }
-        
-        h1, h2, h3, .title-font {
-            font-family: 'Cormorant Garamond', serif;
-        }
+        body { font-family: 'EB Garamond', serif; color: #1a1a1a; margin: 0; padding: 0; }
+        h1, h2, h3, .title-font { font-family: 'Cormorant Garamond', serif; }
 
-        /* The blurred glass effect for the reading area */
         .glass-panel {
             background: rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(16px);
@@ -38,51 +54,36 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
         }
 
-        /* Inner cards for Home page sections */
         .glass-card {
             background: rgba(255, 255, 255, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.2);
             transition: transform 0.2s ease, background 0.2s ease;
         }
-        .glass-card:hover {
-            background: rgba(255, 255, 255, 0.5);
-        }
+        .glass-card:hover { background: rgba(255, 255, 255, 0.5); }
 
-        /* Preserves line breaks and spacing in poems/articles */
-        .content-text {
-            white-space: pre-wrap;
-            line-height: 2.2;
-            font-size: 1.25rem;
-        }
+        .content-text { white-space: pre-wrap; line-height: 2.2; font-size: 1.25rem; }
+        #background-layer { transition: background-image 0.8s ease-in-out; }
 
-        /* Smooth background transitions */
-        #background-layer {
-            transition: background-image 0.8s ease-in-out;
-        }
-
-        /* Hide scrollbar for cleaner look but keep functionality */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.4); }
+
+        /* Style for the Like button to animate when clicked */
+        .like-btn { transition: transform 0.2s; cursor: pointer; }
+        .like-btn:active { transform: scale(0.9); }
+        .liked i { fill: #ef4444; color: #ef4444; } /* Turns heart red */
     </style>
 </head>
 <body class="antialiased min-h-screen relative selection:bg-stone-300 selection:text-stone-900">
 
-    <!-- Fixed Background Image Layer -->
     <div id="background-layer" class="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat" style="background-image: url('');">
-        <!-- Optional dark overlay to ensure the glass panel always pops -->
         <div class="absolute inset-0 bg-black/20"></div>
     </div>
 
-    <!-- Main Content Container -->
     <main class="relative z-10 min-h-screen py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-        <!-- This is where the pages will be injected by JavaScript -->
         <div id="app" class="w-full max-w-4xl glass-panel rounded-2xl p-8 sm:p-12 min-h-[80vh] transition-opacity duration-300">
-            <!-- Content loads here -->
-        </div>
-        
-        <!-- Footer -->
+            </div>
         <footer class="mt-8 text-center text-white/80 text-sm drop-shadow-md">
             <p id="footer-text"></p>
         </footer>
@@ -110,7 +111,7 @@
                 const data = await response.json();
                 SiteConfig = data.config;
                 Poems = data.poems || [];
-                Articles = data.articles || []; // Load articles if they exist
+                Articles = data.articles || [];
 
                 document.title = SiteConfig.siteTitle;
                 document.getElementById('footer-text').innerText = `© ${new Date().getFullYear()} ${SiteConfig.author.name}. All rights reserved.`;
@@ -119,34 +120,25 @@
                 window.addEventListener('hashchange', handleRoute);
                 
             } catch (error) {
-                appDiv.innerHTML = `
-                    <div class="text-center py-20">
-                        <h1 class="title-font text-3xl mb-4">Cannot Load Content</h1>
-                        <p class="mb-4">Failed to load <code>data.json</code>.</p>
-                        <p class="text-sm text-stone-700">Ensure your JSON file contains "poems" and "articles" arrays.</p>
-                    </div>`;
+                appDiv.innerHTML = `<div class="text-center py-20"><h1>Cannot Load Content</h1></div>`;
                 console.error("Error loading JSON:", error);
             }
         }
 
-        // Helper: Sort items by date (newest first)
         const sortItemsByDate = (items) => {
             return items.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
         };
 
-        // Render Social Icons HTML
         function getSocialLinksHTML() {
             if (!SiteConfig.author || !SiteConfig.author.socials) return '';
             return SiteConfig.author.socials.map(social => `
                 <a href="${social.url}" target="_blank" rel="noopener noreferrer" 
-                   class="text-stone-800 hover:text-stone-500 transition-colors p-2"
-                   aria-label="${social.platform}">
+                   class="text-stone-800 hover:text-stone-500 transition-colors p-2">
                     <i data-lucide="${social.icon}" class="w-5 h-5"></i>
                 </a>
             `).join('');
         }
 
-        // Render mini list for Home Page Cards
         function generateMiniList(items, prefix) {
             if (items.length === 0) return `<p class="text-stone-600 italic py-4">Coming soon...</p>`;
             return items.map(item => `
@@ -159,16 +151,13 @@
             `).join('');
         }
 
-        // Render the Home Page
         function renderHome() {
             bgLayer.style.backgroundImage = `url('${SiteConfig.defaultBackground}')`;
-            
             const sortedPoems = sortItemsByDate(Poems).slice(0, HOME_PREVIEW_LIMIT);
             const sortedArticles = sortItemsByDate(Articles).slice(0, HOME_PREVIEW_LIMIT);
 
             return `
                 <div class="animate-fade-in">
-                    <!-- Author Section -->
                     <div class="flex flex-col md:flex-row items-center md:items-start gap-8 border-b border-stone-800/20 pb-10 mb-10">
                         <img src="${SiteConfig.author.photo}" alt="${SiteConfig.author.name}" 
                              class="w-32 h-32 rounded-full object-cover shadow-md border-4 border-white/50">
@@ -182,18 +171,14 @@
                         </div>
                     </div>
 
-                    <!-- Cards Layout -->
                     <div class="grid md:grid-cols-2 gap-8">
-                        <!-- Poetry Card -->
                         <div class="glass-card rounded-2xl p-6 flex flex-col h-full shadow-sm">
                             <div class="flex justify-between items-center mb-6 border-b border-stone-800/20 pb-2">
                                 <h2 class="title-font text-3xl text-stone-900 font-semibold flex items-center">
                                     <i data-lucide="feather" class="w-5 h-5 mr-3 opacity-70"></i> Poetry
                                 </h2>
                             </div>
-                            <div class="flex-grow flex flex-col">
-                                ${generateMiniList(sortedPoems, 'poem')}
-                            </div>
+                            <div class="flex-grow flex flex-col">${generateMiniList(sortedPoems, 'poem')}</div>
                             <div class="mt-6 text-center pt-4 border-t border-stone-800/10">
                                 <a href="#poems/1" class="inline-flex items-center text-stone-700 hover:text-stone-900 font-medium tracking-wide transition-colors">
                                     Read All Poetry <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
@@ -201,16 +186,13 @@
                             </div>
                         </div>
 
-                        <!-- Articles Card -->
                         <div class="glass-card rounded-2xl p-6 flex flex-col h-full shadow-sm">
                             <div class="flex justify-between items-center mb-6 border-b border-stone-800/20 pb-2">
                                 <h2 class="title-font text-3xl text-stone-900 font-semibold flex items-center">
                                     <i data-lucide="book-open" class="w-5 h-5 mr-3 opacity-70"></i> Articles
                                 </h2>
                             </div>
-                            <div class="flex-grow flex flex-col">
-                                ${generateMiniList(sortedArticles, 'article')}
-                            </div>
+                            <div class="flex-grow flex flex-col">${generateMiniList(sortedArticles, 'article')}</div>
                             <div class="mt-6 text-center pt-4 border-t border-stone-800/10">
                                 <a href="#articles/1" class="inline-flex items-center text-stone-700 hover:text-stone-900 font-medium tracking-wide transition-colors">
                                     Read All Articles <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
@@ -222,35 +204,27 @@
             `;
         }
 
-        // Render Pagination Controls
         function renderPagination(type, currentPage, totalPages) {
             if (totalPages <= 1) return '';
-            
             let html = '<div class="flex justify-center flex-wrap gap-2 mt-12">';
             for (let i = 1; i <= totalPages; i++) {
-                const activeClass = i === currentPage 
-                    ? 'bg-stone-800 text-white shadow-md' 
-                    : 'bg-white/40 hover:bg-white/70 text-stone-800';
+                const activeClass = i === currentPage ? 'bg-stone-800 text-white shadow-md' : 'bg-white/40 hover:bg-white/70 text-stone-800';
                 html += `<a href="#${type}/${i}" class="w-10 h-10 flex items-center justify-center rounded-full transition-all ${activeClass} font-medium">${i}</a>`;
             }
             html += '</div>';
             return html;
         }
 
-        // Render List Page (for both Poems and Articles)
         function renderListPage(type, pageStr) {
             bgLayer.style.backgroundImage = `url('${SiteConfig.defaultBackground}')`;
-            
             const currentPage = parseInt(pageStr) || 1;
             const isPoem = type === 'poems';
             const itemsList = isPoem ? Poems : Articles;
             const sortedItems = sortItemsByDate(itemsList);
-            
             const title = isPoem ? 'Complete Poetry Collection' : 'All Articles & Essays';
             const prefix = isPoem ? 'poem' : 'article';
             const icon = isPoem ? 'feather' : 'book-open';
             
-            // Calculate Pagination
             const totalPages = Math.ceil(sortedItems.length / ITEMS_PER_PAGE);
             const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
             const paginatedItems = sortedItems.slice(startIndex, startIndex + ITEMS_PER_PAGE);
@@ -272,55 +246,117 @@
                     <a href="#home" class="inline-flex items-center text-stone-800 hover:text-stone-500 transition-colors mb-8 font-medium tracking-wide">
                         <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i> Return Home
                     </a>
-                    
                     <div class="mb-10 flex items-center border-b border-stone-800/30 pb-6">
                         <i data-lucide="${icon}" class="w-8 h-8 mr-4 text-stone-800 opacity-80"></i>
                         <h1 class="title-font text-4xl sm:text-5xl text-stone-900">${title}</h1>
                     </div>
-                    
-                    <div class="flex flex-col">
-                        ${paginatedItems.length > 0 ? listHTML : '<p class="text-stone-600 italic">No entries found.</p>'}
-                    </div>
-                    
+                    <div class="flex flex-col">${paginatedItems.length > 0 ? listHTML : '<p class="text-stone-600 italic">No entries found.</p>'}</div>
                     ${renderPagination(type, currentPage, totalPages)}
                 </div>
             `;
         }
 
-        // Render a Single Item (Poem or Article)
+        // ==========================================
+        // UPDATED renderItemPage WITH FIREBASE LIKES
+        // ==========================================
         function renderItemPage(item, backListType) {
             const bgImage = item.background && item.background.trim() !== "" ? item.background : SiteConfig.defaultBackground;
             bgLayer.style.backgroundImage = `url('${bgImage}')`;
-
             const formattedText = Array.isArray(item.text) ? item.text.join('\n') : item.text;
             const backLinkText = backListType === 'poems' ? 'Return to Poetry' : 'Return to Articles';
 
+            // Check if user has already liked this item during this session
+            const hasLiked = localStorage.getItem(`liked_${item.id}`);
+
+            // Wait a moment for the DOM to render, then fetch likes
+            setTimeout(() => {
+                fetchLikes(item.id);
+            }, 200);
+
             return `
                 <div class="animate-fade-in max-w-2xl mx-auto">
-                    <!-- Navigation -->
                     <a href="#${backListType}/1" class="inline-flex items-center text-stone-800 hover:text-stone-500 transition-colors mb-10 font-medium tracking-wide">
                         <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i> ${backLinkText}
                     </a>
 
-                    <!-- Header -->
                     <div class="mb-10 text-center">
                         <h1 class="title-font text-5xl sm:text-6xl text-stone-900 mb-4">${item.title}</h1>
                         ${item.date ? `<p class="text-stone-700 italic text-lg">${item.date}</p>` : ''}
                         <div class="w-20 h-px bg-stone-800/30 mx-auto mt-8"></div>
                     </div>
 
-                    <!-- Content -->
                     <div class="content-text text-stone-900 ${backListType === 'poems' ? 'flex justify-center' : ''}">
                         <div>${formattedText}</div>
                     </div>
                     
-                    <!-- Bottom decoration -->
-                    <div class="mt-16 text-center text-stone-800">
+                    <div class="mt-12 flex justify-center items-center gap-3">
+                        <button id="like-btn-${item.id}" 
+                                onclick="handleLike('${item.id}')" 
+                                class="like-btn flex items-center justify-center w-12 h-12 rounded-full bg-white/50 border border-stone-800/20 hover:bg-white shadow-sm ${hasLiked ? 'liked' : ''}">
+                            <i data-lucide="heart" class="w-6 h-6 text-stone-700"></i>
+                        </button>
+                        <span id="like-count-${item.id}" class="text-stone-700 font-medium text-lg">...</span>
+                    </div>
+
+                    <div class="mt-8 text-center text-stone-800">
                         <i data-lucide="feather" class="w-6 h-6 mx-auto opacity-70"></i>
                     </div>
                 </div>
             `;
         }
+
+        // --- FIREBASE LOGIC FUNCTIONS ---
+        
+        async function fetchLikes(itemId) {
+            if (!window.firebaseDB) return; // Wait for Firebase to load
+            
+            const docRef = window.firebaseDoc(window.firebaseDB, "likes", itemId);
+            try {
+                const docSnap = await window.firebaseGetDoc(docRef);
+                const countElement = document.getElementById(`like-count-${itemId}`);
+                
+                if (docSnap.exists() && countElement) {
+                    countElement.innerText = docSnap.data().count + " Likes";
+                } else if (countElement) {
+                    // Document doesn't exist yet, meaning 0 likes
+                    countElement.innerText = "0 Likes";
+                    // Create the document initializing at 0
+                    await window.firebaseSetDoc(docRef, { count: 0 });
+                }
+            } catch (error) {
+                console.error("Error fetching likes:", error);
+            }
+        }
+
+        window.handleLike = async function(itemId) {
+            // Prevent multiple likes from the same browser
+            if (localStorage.getItem(`liked_${itemId}`)) return;
+
+            const btnElement = document.getElementById(`like-btn-${itemId}`);
+            const countElement = document.getElementById(`like-count-${itemId}`);
+            
+            // Optimistic UI update (make it turn red and add 1 immediately for snappy feel)
+            btnElement.classList.add('liked');
+            let currentCount = parseInt(countElement.innerText) || 0;
+            countElement.innerText = (currentCount + 1) + " Likes";
+            
+            // Mark as liked in local storage
+            localStorage.setItem(`liked_${itemId}`, "true");
+
+            // Update Firebase
+            const docRef = window.firebaseDoc(window.firebaseDB, "likes", itemId);
+            try {
+                await window.firebaseUpdateDoc(docRef, {
+                    count: window.firebaseIncrement(1)
+                });
+            } catch (error) {
+                console.error("Error updating likes:", error);
+                // If it fails, revert UI
+                btnElement.classList.remove('liked');
+                countElement.innerText = currentCount + " Likes";
+                localStorage.removeItem(`liked_${itemId}`);
+            }
+        };
 
         // Router function to handle navigation
         function handleRoute() {
