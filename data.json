@@ -4,7 +4,7 @@
     "defaultBackground": "https://images.unsplash.com/photo-1476820865390-c52aeebb9891?auto=format&fit=crop&q=80&w=1920",
     "author": {
       "name": "Gyan Prakash Sahu",
-      "photo": "https://photos.app.goo.gl/wvASMdacnTspzkkT9",
+      "photo": "dp.jpeg",
       "bio": "A poet, wanderer, and observer of the quiet moments between heartbeats. I write to capture the fleeting beauty of nature and human connection.",
       "socials": [
         { "platform": "Instagram", "url": "https://instagram.com", "icon": "instagram" },
@@ -174,10 +174,22 @@
         "",
         "This is the second paragraph separated by an empty line in the JSON array to maintain spacing."
       ]
+    },
+    {
+      "id": "first-article",
+      "title": "My Thoughts on Me",
+      "date": "March 6, 2026",
+      "background": "",
+      "text": [
+        "This is my first paragraph of the article.",
+        "",
+        "This is the second paragraph separated by an empty line in the JSON array to maintain spacing."
+      ]
     }
   ]
 
 }
+
 
 
 
