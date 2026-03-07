@@ -16,9 +16,8 @@
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-
-        // TODO: REPLACE THIS OBJECT WITH YOUR ACTUAL KEYS FROM FIREBASE
+        // Added collection, addDoc, query, where, getDocs, serverTimestamp for comments
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, increment, collection, addDoc, query, where, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
         const firebaseConfig = {
             apiKey: "AIzaSyBbtKgOCP6iFc3Kw_PI7xLaF2HaX--XXC4",
             authDomain: "poem-website-56360.firebaseapp.com",
@@ -32,13 +31,21 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Make Firebase functions available globally so your router can use them
+        // Export everything to window so our router can use it
         window.firebaseDB = db;
         window.firebaseDoc = doc;
         window.firebaseGetDoc = getDoc;
         window.firebaseSetDoc = setDoc;
         window.firebaseUpdateDoc = updateDoc;
         window.firebaseIncrement = increment;
+        
+        // New exports for comments
+        window.firebaseCollection = collection;
+        window.firebaseAddDoc = addDoc;
+        window.firebaseQuery = query;
+        window.firebaseWhere = where;
+        window.firebaseGetDocs = getDocs;
+        window.firebaseServerTimestamp = serverTimestamp;
     </script>
 
     <style>
@@ -70,9 +77,25 @@
         ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.4); }
 
         /* Style for the Like button to animate when clicked */
+        .liked i { fill: #ef4444; color: #ef4444; } /* Turns heart red */
+
         .like-btn { transition: transform 0.2s; cursor: pointer; }
         .like-btn:active { transform: scale(0.9); }
-        .liked i { fill: #ef4444; color: #ef4444; } /* Turns heart red */
+        .liked svg { fill: #ef4444; stroke: #ef4444; transition: all 0.3s ease; } /* Turns heart solid red */
+
+        /* Comment Input Aesthetics */
+        .comment-input {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #1c1917;
+            transition: all 0.2s ease;
+        }
+        .comment-input:focus {
+            outline: none;
+            border-color: rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.7);
+        }
+        .comment-input::placeholder { color: #78716c; }
     </style>
 </head>
 <body class="antialiased min-h-screen relative selection:bg-stone-300 selection:text-stone-900">
@@ -298,6 +321,35 @@
                         <span id="like-count-${item.id}" class="text-stone-700 font-medium text-lg">...</span>
                     </div>
 
+                    <div class="mt-12 flex justify-center items-center gap-3">
+                        <button id="like-btn-${item.id}" 
+                                onclick="handleLike('${item.id}')" 
+                                class="like-btn flex items-center justify-center w-12 h-12 rounded-full bg-white/50 border border-stone-800/20 hover:bg-white shadow-sm ${hasLiked ? 'liked' : ''}">
+                            <i data-lucide="heart" class="w-6 h-6 text-stone-700"></i>
+                        </button>
+                        <span id="like-count-${item.id}" class="text-stone-700 font-medium text-lg">...</span>
+                    </div>
+
+                    <div class="mt-16 pt-10 border-t border-stone-800/20">
+                        <h3 class="title-font text-3xl text-stone-900 mb-6 flex items-center">
+                            <i data-lucide="message-circle" class="w-6 h-6 mr-3 opacity-70"></i> Reflections
+                        </h3>
+                        
+                        <div class="glass-card rounded-xl p-6 mb-10">
+                            <div class="grid gap-4">
+                                <input type="text" id="comment-name-${item.id}" placeholder="Your Name (optional)" class="comment-input w-full px-4 py-3 rounded-lg font-serif text-lg">
+                                <textarea id="comment-text-${item.id}" placeholder="Leave a thought..." rows="3" class="comment-input w-full px-4 py-3 rounded-lg font-serif resize-none text-lg"></textarea>
+                                <button onclick="handleComment('${item.id}', event)" class="bg-stone-800 hover:bg-stone-700 text-white px-6 py-2 rounded-lg font-medium tracking-wide transition-colors self-end sm:w-auto w-full">
+                                    Post Reflection
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="comments-list-${item.id}" class="space-y-6">
+                            <p class="text-stone-600 italic">Loading reflections...</p>
+                        </div>
+                    </div>
+
                     <div class="mt-8 text-center text-stone-800">
                         <i data-lucide="feather" class="w-6 h-6 mx-auto opacity-70"></i>
                     </div>
@@ -355,6 +407,97 @@
                 btnElement.classList.remove('liked');
                 countElement.innerText = currentCount + " Likes";
                 localStorage.removeItem(`liked_${itemId}`);
+            }
+        };
+
+        // --- COMMENT LOGIC FUNCTIONS ---
+        
+        window.fetchComments = async function(itemId) {
+            if (!window.firebaseDB) return;
+            const listEl = document.getElementById(`comments-list-${itemId}`);
+            if (!listEl) return;
+
+            try {
+                // Fetch all comments for this specific poem/article
+                const q = window.firebaseQuery(
+                    window.firebaseCollection(window.firebaseDB, "comments"),
+                    window.firebaseWhere("itemId", "==", itemId)
+                );
+                const querySnapshot = await window.firebaseGetDocs(q);
+                
+                let comments = [];
+                querySnapshot.forEach(doc => comments.push({ id: doc.id, ...doc.data() }));
+
+                if (comments.length === 0) {
+                    listEl.innerHTML = '<p class="text-stone-600 italic">No reflections yet. Be the first to share your thoughts.</p>';
+                    return;
+                }
+
+                // Sort by newest first using JS to avoid complex Firebase index setup
+                comments.sort((a, b) => {
+                    const timeA = a.timestamp ? a.timestamp.toMillis() : Date.now();
+                    const timeB = b.timestamp ? b.timestamp.toMillis() : Date.now();
+                    return timeB - timeA;
+                });
+
+                // Render the comments
+                let html = '';
+                comments.forEach(data => {
+                    const dateStr = data.timestamp ? new Date(data.timestamp.toDate()).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : 'Just now';
+                    
+                    html += `
+                        <div class="border-b border-stone-800/10 pb-6 last:border-0 animate-fade-in">
+                            <div class="flex items-baseline justify-between mb-2">
+                                <span class="title-font text-2xl text-stone-900 font-semibold">${data.author}</span>
+                                <span class="text-sm text-stone-500 italic">${dateStr}</span>
+                            </div>
+                            <p class="text-stone-700 font-serif text-lg leading-relaxed">${data.text.replace(/\n/g, '<br>')}</p>
+                        </div>
+                    `;
+                });
+                
+                listEl.innerHTML = html;
+                lucide.createIcons(); // Refresh icons if any
+
+            } catch (error) {
+                console.error("Error fetching comments:", error);
+                listEl.innerHTML = '<p class="text-red-500/80 italic">Could not load reflections at this time.</p>';
+            }
+        };
+
+        window.handleComment = async function(itemId, event) {
+            const nameInput = document.getElementById(`comment-name-${itemId}`);
+            const textInput = document.getElementById(`comment-text-${itemId}`);
+            const authorName = nameInput.value.trim() || "Wanderer";
+            const commentText = textInput.value.trim();
+            
+            if (!commentText) return; // Don't submit empty comments
+
+            const btn = event.target;
+            const originalBtnText = btn.innerText;
+            btn.innerText = "Posting...";
+            btn.disabled = true;
+
+            try {
+                await window.firebaseAddDoc(window.firebaseCollection(window.firebaseDB, "comments"), {
+                    itemId: itemId,
+                    author: authorName,
+                    text: commentText,
+                    timestamp: window.firebaseServerTimestamp()
+                });
+                
+                // Clear the form
+                nameInput.value = '';
+                textInput.value = '';
+                
+                // Refresh the list immediately
+                await fetchComments(itemId);
+            } catch (error) {
+                console.error("Error posting comment:", error);
+                alert("Something went wrong while posting your reflection.");
+            } finally {
+                btn.innerText = originalBtnText;
+                btn.disabled = false;
             }
         };
 
@@ -419,3 +562,4 @@
     </script>
 </body>
 </html>
+
