@@ -41,7 +41,7 @@
     {
       "id": "rain-song",
       "title": "Song of the rain",
-      "date": "August 2, 2023",
+      "date": "September 13, 2023",
       "background": "https://images.unsplash.com/photo-1455325884260-bc03aa624b7a?auto=format&fit=crop&q=80&w=1920",
       "text": [
         "Droplets of rain,",
@@ -50,12 +50,34 @@
         "Is the air too pushy to change you're direction?",
         "Do the disputes between cloudes settle?",
         "Or do they still disturb you with thier thuderous quarrels?",
-        "Does your'e heart skip a just like mine,",
+        "Does your'e heart skip  just like mine,",
         "when the lightning strikes?",
         "Or are you not afraid of them?",
         "Does the city looks beautiful up from the sky?",
         "Does the journey ahead excite you?",
         "Or are you missing you're home?"
+      ]
+    },
+    {
+      "id": "shaam-jo-hoti-hai",
+      "title": "शाम जो होती है",
+      "date": "March 8, 2026",
+      "background": "",
+      "text": [
+        "शाम जो होती है ,",
+        "अँधेरा फिर ढलता है ,",
+        "उतरता है मेरे मन में।",
+        "सर्द इन रातों में",
+        "तारे टिमटिमाते है,",
+        "पर धुंध जो घुलता है",
+        "सब ओझल कर देता है।",
+        "",
+        "सर्द इन रातों में,",
+        "पनपते तो है मन में कुछ चाहत से,",
+        "पर फिर वही धुंध हो जाता है,",
+        "ओस की बूंदें कैद कर जाती है कच्चे से सपनों को,",
+        "भारी सी बूंदें फिर बरसती है",
+        "अश्रु से बनकर ।।"
       ]
     }
   ],
@@ -85,6 +107,7 @@
   ]
 
 }
+
 
 
 
