@@ -39,15 +39,23 @@
       ]
     },
     {
-      "id": "ocean-song",
-      "title": "Song of the Tide",
+      "id": "rain-song",
+      "title": "Song of the rain",
       "date": "August 2, 2023",
       "background": "https://images.unsplash.com/photo-1455325884260-bc03aa624b7a?auto=format&fit=crop&q=80&w=1920",
       "text": [
-        "The ocean breathes a rhythmic sigh,",
-        "Upon the sandy, golden shore.",
-        "It pulls me in, it pushes back,",
-        "A restless heart, forevermore."
+        "Droplets of rain,",
+        "Why so pitter-patter?",
+        "Don't you like the ride down to earth?,",
+        "Is the air too pushy to change you're direction?"
+        "Do the disputes between cloudes settle?",
+        "Or do they still disturb you with thier thuderous quarrels?",
+        "Does your'e heart skip a just like mine,",
+        "when the lightning strikes?",
+        "Or are you not afraid of them?",
+        "Does the city looks beautiful up from the sky?",
+        "Does the journey ahead excite you?",
+        "Or are you missing you're home?"
       ]
     }
   ],
@@ -77,6 +85,7 @@
   ]
 
 }
+
 
 
 
