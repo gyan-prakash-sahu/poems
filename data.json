@@ -101,8 +101,8 @@
       ]
     },
     {
-      "id": "Piece of peace",
-      "title": "piece of peace",
+      "id": "Piece-of-peace",
+      "title": "Piece of peace",
       "date": "March 12, 2026",
       "background": "https://images.unsplash.com/photo-1509515837298-2c67a42eeac1?auto=format&fit=crop&q=80&w=1920",
       "text": [
@@ -119,7 +119,7 @@
         "before shutting for eternity."
       ]
     }
-    }
+    
   ],
   "articles": [
     {
@@ -134,7 +134,7 @@
       ]
     },
     {
-      "id": "first-article",
+      "id": "second-article",
       "title": "My Thoughts on Me",
       "date": "March 6, 2026",
       "background": "",
@@ -147,6 +147,7 @@
   ]
 
 }
+
 
 
 
