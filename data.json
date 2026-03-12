@@ -5,7 +5,7 @@
     "author": {
       "name": "Gyan Prakash Sahu",
       "photo": "dp.jpeg",
-      "bio": "A poet and observer of the quiet moments between heartbeats. I write to capture the fleeting beauty of nature and human connection.",
+      "bio": "Observer of the quiet moments between heartbeats. I write to capture the fleeting beauty of nature and human connection.",
       "socials": [
         { "platform": "Instagram", "url": "https://instagram.com", "icon": "instagram" },
         { "platform": "Twitter", "url": "https://twitter.com", "icon": "twitter" },
@@ -147,6 +147,7 @@
   ]
 
 }
+
 
 
 
