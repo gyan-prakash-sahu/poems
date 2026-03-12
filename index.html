@@ -72,13 +72,17 @@
         .content-text { 
             white-space: pre-wrap; 
             line-height: 2.2; 
-            font-size: 1.05rem; /* Slightly smaller for mobile */
+            font-size: 0.95rem; /* Slightly smaller for mobile */
+            letter-spacing: -0.01em; /* Pulls letters slightly closer */
+            word-spacing: -0.05em; /* Pulls words slightly closer */
         }
         
         /* When screen is laptop/tablet size, go back to original bigger font */
         @media (min-width: 640px) {
             .content-text {
                 font-size: 1.25rem;
+                letter-spacing: normal;
+                word-spacing: normal;
             }
         }        #background-layer { transition: background-image 0.8s ease-in-out; }
 
@@ -116,7 +120,7 @@
     </div>
 
     <main class="relative z-10 min-h-screen py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-        <div id="app" class="w-full max-w-4xl glass-panel rounded-2xl p-5 sm:p-12 min-h-[80vh] transition-opacity duration-300">
+        <div id="app" class="w-full sm:max-w-4xl glass-panel sm:rounded-2xl p-4 sm:p-12 min-h-[80vh] transition-opacity duration-300">
             </div>
         <footer class="mt-8 text-center text-white/80 text-sm drop-shadow-md">
             <p id="footer-text"></p>
@@ -329,8 +333,8 @@
                         <div class="w-20 h-px bg-stone-800/30 mx-auto mt-8"></div>
                     </div>
 
-                    <div class="content-text text-stone-900 ${backListType === 'poems' ? 'flex justify-center' : ''}">
-                        <div>${formattedText}</div>
+                   <div class="content-text text-stone-900 ${backListType === 'poems' ? 'flex md:justify-center' : ''} w-full px-2 sm:px-0">
+                        <div class="w-full max-w-full overflow-x-hidden">${formattedText}</div>
                     </div>
                     
                     <div class="mt-12 flex justify-center items-center gap-3">
@@ -591,6 +595,7 @@
     </script>
 </body>
 </html>
+
 
 
 
