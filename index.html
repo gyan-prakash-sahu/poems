@@ -68,8 +68,19 @@
         }
         .glass-card:hover { background: rgba(255, 255, 255, 0.5); }
 
-        .content-text { white-space: pre-wrap; line-height: 2.2; font-size: 1.25rem; }
-        #background-layer { transition: background-image 0.8s ease-in-out; }
+/* Preserves line breaks and makes font responsive */
+        .content-text { 
+            white-space: pre-wrap; 
+            line-height: 2.2; 
+            font-size: 1.05rem; /* Slightly smaller for mobile */
+        }
+        
+        /* When screen is laptop/tablet size, go back to original bigger font */
+        @media (min-width: 640px) {
+            .content-text {
+                font-size: 1.25rem;
+            }
+        }        #background-layer { transition: background-image 0.8s ease-in-out; }
 
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
@@ -105,7 +116,7 @@
     </div>
 
     <main class="relative z-10 min-h-screen py-12 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-        <div id="app" class="w-full max-w-4xl glass-panel rounded-2xl p-8 sm:p-12 min-h-[80vh] transition-opacity duration-300">
+        <div id="app" class="w-full max-w-4xl glass-panel rounded-2xl p-5 sm:p-12 min-h-[80vh] transition-opacity duration-300">
             </div>
         <footer class="mt-8 text-center text-white/80 text-sm drop-shadow-md">
             <p id="footer-text"></p>
@@ -580,6 +591,7 @@
     </script>
 </body>
 </html>
+
 
 
 
