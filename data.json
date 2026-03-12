@@ -22,20 +22,20 @@
       "text": [
         "Can we discuss something new?,",
         "",
-        "I'm tired of those repetitive convos",
-        "Of incidents that you twist before you tell",
-        "Use you're imagination to fill the vague details",
-        "Desperation that you show or the feelings that you hide",
-        "Everything's dissected in crazy details",
+        "I'm tired of those repetitive convos,",
+        "Of incidents that you twist before you tell,",
+        "Use you're imagination to fill the vague details,",
+        "Desperation that you show or the feelings that you hide,",
+        "Everything's dissected in crazy details.",
         "",
-        "Personal problems that you bestowed to you're bestie",
-        "Has become a communal topic to make the talk tasty",
+        "Personal problems that you bestowed to you're bestie,",
+        "Has become a communal topic to make the talk tasty.",
         "",
         "Can we discuss something new?",
         "Apart from why she ditched him,",
-        "Or who's she seeing now",
+        "Or who's she seeing now.",
         "",
-        "Cause I'm tired of these repetitive convos"
+        "Cause I'm tired of these repetitive convos."
       ]
     },
     {
@@ -99,6 +99,26 @@
         "",
         "~Gyan"
       ]
+    },
+    {
+      "id": "Piece of peace",
+      "title": "piece of peace",
+      "date": "March 12, 2026",
+      "background": "https://images.unsplash.com/photo-1509515837298-2c67a42eeac1?auto=format&fit=crop&q=80&w=1920",
+      "text": [
+        "Sun slowly tries to decay my pale skin,",
+        "drying my arms from its scorching heat,",
+        "And night slowly dissolves my soul into darkness.",
+        "I feel my feet fade,",
+        "My famished body disintegrating into dust.",
+        "Fumbling dies within me,",
+        "My trembling fingers finally find stillness,",
+        "And my heart loses its beats.",
+        "Eyes open with sheer will,",
+        "grasp final rays of life,",
+        "before shutting for eternity."
+      ]
+    }
     }
   ],
   "articles": [
@@ -127,6 +147,7 @@
   ]
 
 }
+
 
 
 
